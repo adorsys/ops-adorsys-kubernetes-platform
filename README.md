@@ -22,3 +22,14 @@ repo
 2. Create a new branch
 3. Create a new `*-cluster` folder and copy/adjust the `main.tf`
 4. Review the PR and merge on `main`
+
+## Initial Setup
+> **Note**
+>
+> This is done once(!) and here for documentation purpose only. If we switch
+> aws accounts or basic infrastructure, some tasks might be neccessary again.
+
+### User Setup in AWS for terraform-github action
+* Create an IAM User in the aws account [#3](https://github.com/adorsys/ops-k8s-bootstrap/issues/3)
+* Create a tfstate Bucket and allow that user to configure it [#2](https://github.com/adorsys/ops-k8s-bootstrap/issues/2)
+
