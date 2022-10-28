@@ -6,7 +6,7 @@ on:
 defaults:
   run:
     # todo: adapt cwd
-    working-directory: service-cluster
+    working-directory: staging-cluster
 jobs:
   apply:
     runs-on: ubuntu-latest # The following are JavaScript actions (not Docker)
@@ -25,13 +25,6 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
     - name: Setup Kubeconfig
       id: kubeconfig
       run: |
@@ -39,6 +32,13 @@ jobs:
         -H  "accept: application/octet-stream" -H "Authorization: Bearer ${{ secrets.SA_SERVICE_CLUSTER }}" > .kubeconfig
         chmod go-r .kubeconfig
         export KUBECONFIG=.kubeconfig
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Terraform Apply
       id: apply
