@@ -32,6 +32,14 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+    - name: Setup Kubeconfig
+      id: kubeconfig
+      run: |
+        curl -X GET "https://kaas.cloudpunks.io/api/v2/projects/j26n8v9zmw/clusters/xm6ff2rfvq/kubeconfig" \
+        -H  "accept: application/octet-stream" -H "Authorization: Bearer ${{ secrets.SA_SERVICE_CLUSTER }}" > .kubeconfig
+        chmod go-r .kubeconfig
+        export KUBECONFIG=.kubeconfig
+
     - name: Terraform Apply
       id: apply
       run: terraform apply -auto-approve
