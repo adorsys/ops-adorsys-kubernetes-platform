@@ -24,7 +24,9 @@ metadata:
 spec:
   privileged: false
   allowPrivilegeEscalation: false
-  volumes: []
+  volumes:
+    - projected
+    - secret
   hostNetwork: false
   hostIPC: false
   hostPID: false

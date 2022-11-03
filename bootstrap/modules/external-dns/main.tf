@@ -15,8 +15,19 @@ resource "helm_release" "external_dns" {
     <<YAML
 domainFilters:
   - adorsys.io
-
-
+env:
+  - name: AWS_DEFAULT_REGION
+    value: eu-central-1
+  - name: AWS_SHARED_CREDENTIALS_FILE
+    value: /.aws/credentials
+extraVolumeMounts:
+  - name: aws-credentials
+    mountPath: /.aws
+    readOnly: true
+extraVolumes:
+  - name: aws-credentials
+    secret:
+      secretName: external-dns
 YAML
   ]
 }
