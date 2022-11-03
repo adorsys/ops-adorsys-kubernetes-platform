@@ -1,3 +1,7 @@
+resource "aws_iam_access_key" "externaldns" {
+  user    = aws_iam_user.externaldns.name
+}
+
 resource "aws_iam_user" "externaldns" {
   name = "${var.cluster_name}_cluster_dns_user"
   path = "/externaldns/"
