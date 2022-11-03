@@ -7,9 +7,4 @@ terraform {
 
     encrypt = true
   }
-
-  kubectl = {
-    source  = "gavinbunney/kubectl"
-    version = "~> 1.13"
-  }
 }
