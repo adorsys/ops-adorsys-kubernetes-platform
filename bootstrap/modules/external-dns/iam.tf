@@ -1,10 +1,10 @@
 resource "aws_iam_user" "externaldns" {
-  name = "${cluster_name}_cluster_dns_user"
+  name = "${var.cluster_name}_cluster_dns_user"
   path = "/externaldns/"
 }
 
 resource "aws_iam_user_policy" "externaldns" {
-  name = "${cluster_name}_cluster_dns_policy"
+  name = "${var.cluster_name}_cluster_dns_policy"
   user = aws_iam_user.externaldns.name
 
   # Terraform's "jsonencode" function converts a
