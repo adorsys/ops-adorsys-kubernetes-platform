@@ -28,6 +28,7 @@ extraVolumes:
   - name: aws-credentials
     secret:
       secretName: external-dns
+
 YAML
   ]
 }
