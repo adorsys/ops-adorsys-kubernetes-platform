@@ -16,8 +16,3 @@ provider "aws" {
     }
   }
 }
-
-provider "kubectl" {
-  load_config_file = true
-  config_path      = ".kubeconfig"
-}
