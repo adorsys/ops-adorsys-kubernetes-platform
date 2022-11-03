@@ -23,7 +23,7 @@ resource "aws_iam_user_policy" "externaldns" {
         "route53:ChangeResourceRecordSets"
       ],
       "Resource": [
-        "arn:aws:route53::571075516563:adorsys.io/Z01771591GBUB3YYNQKTI"
+        "arn:aws:route53::571075516563:hostedzone/Z01771591GBUB3YYNQKTI"
       ]
     },
     {
