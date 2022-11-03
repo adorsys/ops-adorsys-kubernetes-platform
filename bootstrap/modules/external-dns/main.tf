@@ -9,7 +9,7 @@ resource "helm_release" "external_dns" {
   atomic           = true
   cleanup_on_fail  = true
   lint             = true
-  timeout          = 70
+  timeout          = 200
 
   values = [
     <<YAML
