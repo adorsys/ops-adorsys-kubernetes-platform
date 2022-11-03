@@ -1,9 +1,3 @@
-provider "helm" {
-  kubernetes {
-    config_path = ".kubeconfig"
-  }
-}
-
 provider "aws" {
   region  = "eu-central-1"
   profile = ""
@@ -14,6 +8,12 @@ provider "aws" {
       Owner   = "ops"
       Name    = "ops-k8s-bootstrap"
     }
+  }
+}
+
+provider "helm" {
+  kubernetes {
+    config_path = ".kubeconfig"
   }
 }
 

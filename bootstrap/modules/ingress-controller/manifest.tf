@@ -1,0 +1,77 @@
+resource "kubectl_manifest" "psp" {
+  yaml_body = <<YAML
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  allowedCapabilities:
+    - NET_BIND_SERVICE
+  privileged: false
+  allowPrivilegeEscalation: true
+  # Allow core volume types.
+  volumes:
+    - configMap
+    - secret
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    # Require the container to run without root privileges.
+    rule: MustRunAsNonRoot
+  supplementalGroups:
+    rule: MustRunAs
+    ranges:
+      # Forbid adding the root group.
+      - min: 1
+        max: 65535
+  fsGroup:
+    rule: MustRunAs
+    ranges:
+      # Forbid adding the root group.
+      - min: 1
+        max: 65535
+  readOnlyRootFilesystem: false
+  seLinux:
+    rule: RunAsAny
+YAML
+}
+
+resource "kubectl_manifest" "role" {
+  yaml_body = <<YAML
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ingress-nginx-psp
+  namespace: ingress-nginx
+rules:
+- apiGroups: [policy]
+  resources: [podsecuritypolicies]
+  verbs: [use]
+  resourceNames: [ingress-nginx]
+YAML
+}
+
+resource "kubectl_manifest" "rb" {
+  yaml_body = <<YAML
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ingress-nginx-psp
+  namespace: ingress-nginx
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ingress-nginx-psp
+subjects:
+- kind: ServiceAccount
+  name: default
+- kind: ServiceAccount
+  name: ingress-nginx
+  namespace: ingress-nginx
+- kind: ServiceAccount
+  name: ingress-nginx-admission
+  namespace: ingress-nginx
+YAML
+}
+
