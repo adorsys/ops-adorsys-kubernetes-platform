@@ -79,7 +79,7 @@ roleRef:
   name: externaldns
 subjects:
   - kind: ServiceAccount
-    name: externaldns
+    name: external-dns
     namespace: ops-externaldns
 YAML
 }
