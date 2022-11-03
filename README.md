@@ -3,9 +3,11 @@
 This repository bootstraps all k8s cluster provisioned by kubermatic.
 
 The following tools are configured by **terraform**:
+* external-dns
+* nginx ingress
+* certmanager with letsencrypt
 * argocd & github webhook
 * dex
-* external-dns/aws DNS configuration
 
 The following tools are provided as ArgoCD `Applications`:
 * stakater/reloader
@@ -32,4 +34,4 @@ repo
 ### User Setup in AWS for terraform-github action
 * Create an IAM User in the aws account [#3](https://github.com/adorsys/ops-k8s-bootstrap/issues/3)
 * Create a tfstate Bucket and allow that user to configure it [#2](https://github.com/adorsys/ops-k8s-bootstrap/issues/2)
-
+* Update the TF IAM User to allow IAM User creation for DNS Management [#5](https://github.com/adorsys/ops-k8s-bootstrap/issues/5)
