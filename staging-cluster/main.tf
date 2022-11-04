@@ -8,4 +8,7 @@ module "ingress" {
   source = "../bootstrap/modules/ingress-nginx"
 
 }
+module "cert-manager" {
+  source = "../bootstrap/modules/cert-manager"
 
+}
