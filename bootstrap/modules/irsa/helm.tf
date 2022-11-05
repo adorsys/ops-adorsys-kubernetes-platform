@@ -29,12 +29,14 @@ metadata:
 spec:
   privileged: false
   allowPrivilegeEscalation: false
-  volumes: []
+  volumes:
+    - secret
+    - projected
   hostNetwork: false
   hostIPC: false
   hostPID: false
   runAsUser:
-    rule: 'MustRunAsNonRoot'
+    rule: 'RunAsAny'
   seLinux:
     rule: 'RunAsAny'
   supplementalGroups:
@@ -45,8 +47,8 @@ spec:
   fsGroup:
     rule: 'MustRunAs'
     ranges:
-      - min: 65534
-        max: 65534
+      - min: 1
+        max: 1
   readOnlyRootFilesystem: true
   requiredDropCapabilities:
     - ALL
