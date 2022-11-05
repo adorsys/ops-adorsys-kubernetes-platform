@@ -5,4 +5,16 @@ variable "cluster_name" {
   default = "staging"
 }
 
+variable "cluster_id" {
+  type        = string
+  description = "The kubermatic cluster id (not mixed up with the project_id)"
 
+  default = "xm6ff2rfvq"
+}
+
+variable "cluster_port" {
+  type        = string
+  description = "The kubermatic cluster port"
+
+  default = "32484"
+}
