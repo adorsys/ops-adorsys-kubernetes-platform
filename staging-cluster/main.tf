@@ -21,7 +21,7 @@ module "irsa" {
 
 
 resource "aws_iam_role" "s3" {
-  name               = "s3_echoer"
+  name               = "s3-echoer"
   assume_role_policy = data.aws_iam_policy_document.trust.json
 }
 
@@ -66,6 +66,7 @@ spec:
   template:
     spec:
       serviceAccountName: s3-echoer
+      restartPolicy: OnFailure
       containers:
       - name: main
         image: amazonlinux
