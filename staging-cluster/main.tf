@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "trust" {
 
     condition {
       test     = "StringEquals"
-      values   = ["system:serviceaccount:default:s3_echoer"]
+      values   = ["system:serviceaccount:default:s3-echoer"]
       variable = "kubermatic-staging-irsa.s3.eu-central-1.amazonaws.com:sub"
     }
   }
@@ -65,7 +65,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: s3_echoer
+      serviceAccountName: s3-echoer
       containers:
       - name: main
         image: amazonlinux
@@ -143,7 +143,7 @@ roleRef:
   name: s3echoer
 subjects:
   - kind: ServiceAccount
-    name: s3_echoer
+    name: s3-echoer
     namespace: default
 YAML
 }
