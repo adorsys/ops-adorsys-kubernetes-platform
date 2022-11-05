@@ -69,7 +69,7 @@ spec:
       restartPolicy: OnFailure
       containers:
       - name: main
-        image: amazonlinux
+        image: amazon/aws-cli
         command:
         - "sh"
         - "-c"
