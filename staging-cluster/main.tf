@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "trust" {
 
     condition {
       test     = "StringEquals"
-      values   = "system:serviceaccount:default:s3_echoer"
+      values   = ["system:serviceaccount:default:s3_echoer"]
       variable = "kubermatic-staging-irsa.s3.eu-central-1.amazonaws.com:sub"
     }
   }
