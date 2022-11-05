@@ -85,7 +85,7 @@ roleRef:
   name: pod-identity-webhook
 subjects:
   - kind: ServiceAccount
-    name: default
+    name: amazon-eks-pod-identity-webhook
     namespace: ops-pod-identity-webhook
 YAML
 }
