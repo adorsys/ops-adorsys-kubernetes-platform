@@ -9,12 +9,12 @@ variable "cluster_id" {
   type        = string
   description = "The kubermatic cluster id (not mixed up with the project_id)"
 
-  default = "7cdrqrfvvs"
+  default = "xm6ff2rfvq"
 }
 
 variable "cluster_port" {
   type        = string
   description = "The kubermatic cluster port"
 
-  default = "30291"
+  default = "32484"
 }
