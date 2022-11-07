@@ -19,16 +19,18 @@ server:
   extraArgs:
     - --insecure
   config:
-    url: https://argocd-${var.cluster_name}.adorsys.kaas.cloudpunks.dev
+    url: https://argocd.${var.cluster_name}.adorsys.io
   ingress:
     enabled: true
     ingressClassName: nginx
+    annotations:
+      kubernetes.io/tls-acme: "true"
     hosts:
-      - argocd-${var.cluster_name}.adorsys.kaas.cloudpunks.dev
+      - argocd.${var.cluster_name}.adorsys.io
     tls:
       - hosts:
-        - argocd-${var.cluster_name}.adorsys.kaas.cloudpunks.dev
-        secretName: adorsys-wildcard
+        - argocd.${var.cluster_name}.adorsys.io
+        secretName: argocd-ingress
 YAML
     , var.argocd_values
   ]

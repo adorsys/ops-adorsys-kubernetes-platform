@@ -4,7 +4,6 @@ apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: default-argocd
-  namespace: default
 spec:
   allowedCapabilities:
     - NET_BIND_SERVICE
@@ -13,6 +12,7 @@ spec:
   volumes:
     - configMap
     - secret
+    - emptyDir
   hostNetwork: false
   hostIPC: false
   hostPID: false
@@ -47,7 +47,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: argocd-psp
-  namespace: default
+  namespace: ops-argocd
 rules:
   - apiGroups: [policy]
     resources: [podsecuritypolicies]
@@ -62,7 +62,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: argocd-psp
-  namespace: default
+  namespace: ops-argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -70,11 +70,18 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
+    namespace: ops-argocd
   - kind: ServiceAccount
-    name: acrgocd
-    namespace: default
+    name: argocd-notifications-controller
+    namespace: ops-argocd
   - kind: ServiceAccount
-    name: argocd-admission
-    namespace: default
+    name: argocd-applicationset-controller
+    namespace: ops-argocd
+  - kind: ServiceAccount
+    name: argocd-server
+    namespace: ops-argocd
+  - kind: ServiceAccount
+    name: argocd-repo-server
+    namespace: ops-argocd
 YAML
 }
