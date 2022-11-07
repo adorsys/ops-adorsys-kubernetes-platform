@@ -19,6 +19,18 @@ server:
   extraArgs:
     - --insecure
   config:
+    oidc.config: |
+      name: Microsoft
+      issuer: https://login.${var.cluster_name}.adorsys.io/dex/
+      clientID: $dex-argocd-client:client-id
+      clientSecret: $dex-argocd-client:client-secret
+      requestedIDTokenClaims:
+        groups:
+          essential: false
+      requestedScopes:
+        - openid
+        - email
+        - profile
     url: https://argocd.${var.cluster_name}.adorsys.io
   ingress:
     enabled: true
