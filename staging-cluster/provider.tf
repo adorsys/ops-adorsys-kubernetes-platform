@@ -23,7 +23,6 @@ provider "kubectl" {
 }
 
 terraform {
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -36,6 +35,10 @@ terraform {
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = "1.14.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "3.4.3"
     }
   }
 }
