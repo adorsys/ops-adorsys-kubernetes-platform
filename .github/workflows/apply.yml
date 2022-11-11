@@ -9,7 +9,7 @@ defaults:
     working-directory: staging-cluster
 jobs:
   apply:
-    runs-on: ubuntu-latest # The following are JavaScript actions (not Docker)
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: hashicorp/setup-terraform@v2

@@ -1,0 +1,51 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    # todo: adapt cwd
+    working-directory: staging-cluster
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      - uses: aquasecurity/tfsec-action@v1.0.0
+        id: tfsec
+        with:
+          additional_args: "--out tfsec.xml"
+          soft_fail: true
+          format: junit
+      - uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          report_paths: 'tfsec.xml'
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -upgrade
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Setup Kubeconfig
+        id: kubeconfig
+        run: |
+          curl -X GET "https://kaas.cloudpunks.io/api/v2/projects/j26n8v9zmw/clusters/xm6ff2rfvq/kubeconfig" \
+          -H  "accept: application/octet-stream" -H "Authorization: Bearer ${{ secrets.SA_SERVICE_CLUSTER }}" > .kubeconfig
+          chmod go-r .kubeconfig
+          export KUBECONFIG=.kubeconfig
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
