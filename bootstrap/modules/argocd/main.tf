@@ -2,7 +2,7 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   name       = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
-  version    = "5.13.6"
+  version    = "5.13.5"
   namespace  = "ops-argocd"
 
   create_namespace = true
@@ -15,6 +15,9 @@ resource "helm_release" "argocd" {
     <<YAML
 dex:
   enabled: false
+configs:
+  rbac:
+    policy.default: "role:readonly"
 server:
   extraArgs:
     - --insecure
