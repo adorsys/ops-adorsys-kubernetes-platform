@@ -2,11 +2,13 @@ resource "aws_iam_access_key" "externaldns" {
   user    = aws_iam_user.externaldns.name
 }
 
+#tfsec:ignore:aws-iam-no-user-attached-policies
 resource "aws_iam_user" "externaldns" {
   name = "${var.cluster_name}_cluster_dns_user"
   path = "/externaldns/"
 }
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_user_policy" "externaldns" {
   name = "${var.cluster_name}_cluster_dns_policy"
   user = aws_iam_user.externaldns.name
