@@ -1,4 +1,5 @@
 *.kubeconfig
+*.kubermatic
 
 # Local .terraform directories
 **/.terraform/*

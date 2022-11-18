@@ -1,4 +1,4 @@
-# Kubernetes Bootstrapping
+# :cloud: Kubernetes Bootstrapping
 
 This repository bootstraps all k8s cluster provisioned by kubermatic.
 
@@ -15,7 +15,7 @@ The following tools are provided as ArgoCD `Applications`:
 * kube-prometheus
 * trivy
 
-## Add new cluster
+## :grey_question: Add new cluster
 After the initial creation of the kubermatic cluster the following steps should
 be necessary to bootstrap:
 
