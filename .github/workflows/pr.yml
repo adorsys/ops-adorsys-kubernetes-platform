@@ -3,13 +3,25 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    # todo: adapt cwd
-    working-directory: staging-cluster
 jobs:
+  getDirs:
+    runs-on: ubuntu-latest
+    outputs:
+      dir: ${{ steps.set-dirs.outputs.dir }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-dirs
+        run: echo "dir=$(ls -d *-cluster/ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+
   plan:
     runs-on: ubuntu-latest
+    needs: [getDirs]
+    strategy:
+      matrix:
+        cluster: ${{fromJson(needs.getDirs.outputs.dir)}}
+    defaults:
+      run:
+        working-directory: ${{ matrix.cluster }}
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
