@@ -25,6 +25,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
     - name: Terraform Init
       id: init
       run: terraform init -upgrade
@@ -36,11 +38,19 @@ jobs:
       id: validate
       run: terraform validate -no-color
 
+    - name: Set Cluster ID
+      id: env_var
+      run: |
+        echo "CLUSTER_ID=$(terraform output -raw cluster_id)" >> $GITHUB_OUTPUT
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
     - name: Setup Kubeconfig
       id: kubeconfig
       run: |
-        curl -X GET "https://kaas.cloudpunks.io/api/v2/projects/j26n8v9zmw/clusters/xm6ff2rfvq/kubeconfig" \
-        -H  "accept: application/octet-stream" -H "Authorization: Bearer ${{ secrets.SA_SERVICE_CLUSTER }}" > .kubeconfig
+        curl -X GET "https://kaas.cloudpunks.io/api/v2/projects/${{ secrets.KAAS_PROJECT_ID }}/clusters/${{ steps.env_var.outputs.CLUSTER_ID }}/kubeconfig" \
+        -H  "accept: application/octet-stream" -H "Authorization: Bearer ${{ secrets.SA_DEV_INTERN }}" > .kubeconfig
         chmod go-r .kubeconfig
         export KUBECONFIG=.kubeconfig
 
