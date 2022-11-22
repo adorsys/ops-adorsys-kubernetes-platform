@@ -18,6 +18,9 @@ dex:
 configs:
   rbac:
     policy.default: "role:readonly"
+    policy.csv: |
+      p, role:readonly, applications, sync, */*, allow
+      p, role:readonly, applications, action/*, */*, allow
 server:
   extraArgs:
     - --insecure
