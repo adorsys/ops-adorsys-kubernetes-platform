@@ -49,7 +49,6 @@ spec:
   requiredDropCapabilities:
     - ALL
 YAML
-  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "role" {
