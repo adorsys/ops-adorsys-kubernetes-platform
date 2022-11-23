@@ -5,7 +5,6 @@ resource "helm_release" "dex" {
   version    = "0.12.1"
   namespace  = "ops-dex"
 
-  create_namespace = true
   atomic           = true
   cleanup_on_fail  = true
   lint             = true

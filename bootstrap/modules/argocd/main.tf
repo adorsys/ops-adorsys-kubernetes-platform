@@ -5,7 +5,6 @@ resource "helm_release" "argocd" {
   version    = "5.13.9"
   namespace  = "ops-argocd"
 
-  create_namespace = true
   atomic           = true
   cleanup_on_fail  = true
   lint             = true

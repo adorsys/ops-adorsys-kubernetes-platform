@@ -39,6 +39,7 @@ spec:
   requiredDropCapabilities:
     - ALL
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "role" {
@@ -54,6 +55,7 @@ rules:
     verbs: [use]
     resourceNames: [default-dex]
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "rb" {
@@ -72,6 +74,7 @@ subjects:
     name: dex
     namespace: ops-dex
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
 
 data "aws_secretsmanager_secret" "azure" {
@@ -94,6 +97,7 @@ data:
   MICROSOFT_CLIENT_ID: ${base64encode(jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_ID"])}
   MICROSOFT_CLIENT_SECRET: ${base64encode(jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_SECRET"])}
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "random_password" "dex_argocd_client" {
@@ -115,6 +119,7 @@ data:
   client-id: ${base64encode("argo")}
   client-secret: ${base64encode(random_password.dex_argocd_client.result)}
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "dex_argocd_dex_client" {
@@ -129,4 +134,5 @@ data:
   client-id: ${base64encode("argo")}
   client-secret: ${base64encode(random_password.dex_argocd_client.result)}
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }

@@ -5,7 +5,6 @@ resource "helm_release" "cert_manager" {
   version    = "v1.10.0"
   namespace  = "ops-cert-manager"
 
-  create_namespace = true
   atomic           = true
   cleanup_on_fail  = true
   lint             = true

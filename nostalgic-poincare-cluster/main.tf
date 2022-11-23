@@ -13,6 +13,7 @@ module "dex" {
   source = "../bootstrap/modules/dex"
 
   cluster_name = var.cluster_name
+  depends_on = [module.argocd]
 }
 
 module "dns" {

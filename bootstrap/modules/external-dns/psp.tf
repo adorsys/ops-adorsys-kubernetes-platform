@@ -1,12 +1,3 @@
-resource "kubectl_manifest" "ns" {
-  yaml_body = <<YAML
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: ops-externaldns
-YAML
-}
-
 resource "kubectl_manifest" "secret" {
   yaml_body = <<YAML
 apiVersion: v1
@@ -22,7 +13,7 @@ stringData:
     aws_access_key_id = ${aws_iam_access_key.externaldns.id}
     aws_secret_access_key = ${aws_iam_access_key.externaldns.secret}
 YAML
-    depends_on = [kubectl_manifest.ns]
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "psp" {
@@ -58,7 +49,7 @@ spec:
   requiredDropCapabilities:
     - ALL
 YAML
-    depends_on = [kubectl_manifest.ns]
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "role" {
@@ -78,7 +69,7 @@ rules:
     resourceNames:
       - externaldns
 YAML
-    depends_on = [kubectl_manifest.ns]
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "rb" {
@@ -97,5 +88,5 @@ subjects:
     name: external-dns
     namespace: ops-externaldns
 YAML
-    depends_on = [kubectl_manifest.ns]
+  depends_on = [kubernetes_manifest.ns]
 }

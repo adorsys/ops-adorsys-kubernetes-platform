@@ -5,7 +5,6 @@ resource "helm_release" "ingress_nginx" {
   version    = "4.4.0"
   namespace  = "ops-ingress-nginx"
 
-  create_namespace = true
   atomic           = true
   cleanup_on_fail  = true
   lint             = true
