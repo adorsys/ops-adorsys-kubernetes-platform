@@ -5,7 +5,6 @@ resource "helm_release" "external_dns" {
   version    = "1.11.0"
   namespace  = "ops-externaldns"
 
-  create_namespace = true
   atomic           = true
   cleanup_on_fail  = true
   lint             = true

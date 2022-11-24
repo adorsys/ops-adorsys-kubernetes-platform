@@ -22,6 +22,10 @@ provider "kubectl" {
   config_path = ".kubeconfig"
 }
 
+provider "kubernetes" {
+  config_path = ".kubeconfig"
+}
+
 terraform {
   required_providers {
     aws = {
@@ -35,6 +39,10 @@ terraform {
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = "1.14.0"
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.16.0"
     }
     random = {
       source = "hashicorp/random"

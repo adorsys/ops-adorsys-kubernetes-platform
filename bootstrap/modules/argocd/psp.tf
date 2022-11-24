@@ -57,6 +57,7 @@ rules:
     verbs: [use]
     resourceNames: [default-argocd]
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
 
 resource "kubectl_manifest" "rb" {
@@ -87,4 +88,5 @@ subjects:
     name: argocd-repo-server
     namespace: ops-argocd
 YAML
+  depends_on = [kubernetes_manifest.ns]
 }
