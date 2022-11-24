@@ -51,5 +51,6 @@ server:
 YAML
     , var.argocd_values
   ]
+  depends_on = [kubernetes_manifest.ns]
 }
 
