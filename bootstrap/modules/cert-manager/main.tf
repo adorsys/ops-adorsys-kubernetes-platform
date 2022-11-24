@@ -21,4 +21,5 @@ extraArgs:
   - --default-issuer-kind=ClusterIssuer
 YAML
   ]
+  depends_on = [kubernetes_manifest.ns]
 }

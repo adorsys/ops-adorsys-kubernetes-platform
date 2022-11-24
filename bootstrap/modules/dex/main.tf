@@ -62,5 +62,6 @@ config:
   enablePasswordDB: false
 YAML
   ]
+  depends_on = [kubernetes_manifest.ns]
 }
 
