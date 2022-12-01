@@ -66,7 +66,7 @@ resource "kubernetes_role" "externaldns" {
     verbs          = ["use"]
     api_groups     = ["policy"]
     resources      = ["podsecuritypolicies"]
-    resource_names = ["externaldns"]
+    resource_names = ["external-dns"]
   }
   depends_on = [kubernetes_manifest.ns]
 }
