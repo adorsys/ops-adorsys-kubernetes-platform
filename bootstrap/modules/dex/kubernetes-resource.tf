@@ -6,7 +6,7 @@ data "aws_secretsmanager_secret_version" "azure" {
   secret_id = data.aws_secretsmanager_secret.azure.id
 }
 
-resource "kubernetes_pod_security_policy" "default_dex" {
+resource "kubernetes_pod_security_policy" "default-dex" {
   metadata {
     name = "default-dex"
   }
@@ -80,7 +80,7 @@ resource "kubernetes_role_binding" "dex_psp" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
-    name      = "dex-psp"
+    name      = "dex-role"
   }
   depends_on = [kubernetes_manifest.ns]
 }
@@ -92,8 +92,8 @@ resource "kubernetes_secret" "dex_azure_ad_connector" {
   }
 
   data = {
-    MICROSOFT_CLIENT_ID = base64encode(jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_ID"])
-    MICROSOFT_CLIENT_SECRET = base64encode(jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_SECRET"])
+    MICROSOFT_CLIENT_ID = jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_ID"]
+    MICROSOFT_CLIENT_SECRET = jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_SECRET"]
   }
 
   type = "Opaque"
@@ -116,8 +116,8 @@ resource "kubernetes_secret" "dex_argocd_client" {
   }
 
   data = {
-    client-id = base64encode("argo")
-    client-secret = base64encode(random_password.dex_argocd_client.result)
+    client-id = "argo"
+    client-secret = random_password.dex_argocd_client.result
   }
 
   type = "Opaque"
@@ -131,8 +131,8 @@ resource "kubernetes_secret" "dex_argocd" {
   }
 
   data = {
-    client-id = base64encode("argo")
-    client-secret = base64encode(random_password.dex_argocd_client.result)
+    client-id = "argo"
+    client-secret = random_password.dex_argocd_client.result
   }
 
   type = "Opaque"
