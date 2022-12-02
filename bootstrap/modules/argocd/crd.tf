@@ -35,7 +35,7 @@ spec:
   source:
     kustomize: {}
     repoURL: git@github.com:adorsys/ops-k8s-bootstrap.git
-    targetRevision: gitlab-test-application
+    targetRevision: main
     path: "${var.cluster_name}-cluster/applications"
   destination:
     server: https://kubernetes.default.svc
@@ -60,7 +60,7 @@ spec:
   source:
     kustomize: {}
     repoURL: git@github.com:adorsys/ops-k8s-bootstrap.git
-    targetRevision: gitlab-test-application
+    targetRevision: main
     path: "${var.cluster_name}-cluster/ops"
   destination:
     server: https://kubernetes.default.svc
