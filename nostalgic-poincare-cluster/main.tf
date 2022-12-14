@@ -22,6 +22,12 @@ module "dns" {
   cluster_name = var.cluster_name
 }
 
+module "external-secrets" {
+  source = "../bootstrap/modules/external-secrets"
+
+  cluster_name = var.cluster_name
+}
+
 module "ingress" {
   source = "../bootstrap/modules/ingress-nginx"
 }
