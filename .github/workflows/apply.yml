@@ -41,7 +41,7 @@ jobs:
     - name: Set Cluster ID
       id: env_var
       run: |
-        echo "CLUSTER_ID=$(terraform output -raw cluster_id)" >> $GITHUB_OUTPUT
+        echo "CLUSTER_ID=$(cat CLUSTERID.md)" >> $GITHUB_OUTPUT
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -53,13 +53,6 @@ jobs:
         -H  "accept: application/octet-stream" -H "Authorization: Bearer ${{ secrets.SA_DEV_INTERN }}" > .kubeconfig
         chmod go-r .kubeconfig
         export KUBECONFIG=.kubeconfig
-
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Terraform Apply
       id: apply
