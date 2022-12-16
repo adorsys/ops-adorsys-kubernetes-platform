@@ -3,6 +3,8 @@
 # this will setup:
 #   a s3 bucket for the tfstate
 #   a iam user to manage the rest from github
+#
+# If you need to add policies to the github user, run this
 
 provider "aws" {
   region  = "eu-central-1"
@@ -20,15 +22,98 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
+#tfsec:ignore:aws-iam-no-user-attached-policies
 resource "aws_iam_user" "ops_github_kaas" {
   name = "ops-github-kaas"
   path = "/automation/"
 }
 
+resource "aws_iam_user_policy" "iam_cluster_users" {
+  name = "iam_cluster_users"
+  user = aws_iam_user.ops_github_kaas.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = <<JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1667481895055",
+            "Action": [
+                "iam:CreateUser",
+                "iam:ListGroupsForUser",
+                "iam:Taguser",
+                "iam:DeleteUser",
+                "iam:PutUserPolicy",
+                "iam:GetUser",
+                "iam:GetUserPolicy",
+                "iam:CreateAccessKey",
+                "iam:ListAccessKeys"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/automation/incluster/*"
+        }
+    ]
+}
+JSON
+}
+
+resource "aws_iam_user_policy" "secretsmanager" {
+  name = "secretsmanager"
+  user = aws_iam_user.ops_github_kaas.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = <<JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1667997895963",
+            "Action": [
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:GetResourcePolicy",
+                "secretsmanager:GetSecretValue"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:secretsmanager:eu-central-1:${data.aws_caller_identity.current.account_id}:secret:kaas/*"
+        }
+    ]
+}
+JSON
+}
+
+resource "aws_iam_user_policy" "route53" {
+  name = "route53"
+  user = aws_iam_user.ops_github_kaas.id
+
+  #tfsec:ignore:aws-iam-no-policy-wildcards
+  policy = <<JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1667997895964",
+            "Action": [
+                "route53:GetHostedZone",
+                "route53:ListHostedZones",
+                "route53:ListTagsForResource"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+JSON
+}
+
+
 resource "aws_iam_access_key" "github" {
   user = aws_iam_user.ops_github_kaas.name
 }
 
+#tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket" "tfstate" {
   bucket = "ops-kaas-tfstate"
 }
@@ -45,6 +130,7 @@ resource "aws_s3_bucket_versioning" "tfstate" {
   }
 }
 
+#tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.tfstate.id
 
