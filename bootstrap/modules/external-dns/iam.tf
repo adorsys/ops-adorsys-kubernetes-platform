@@ -1,11 +1,15 @@
 resource "aws_iam_access_key" "externaldns" {
-  user    = aws_iam_user.externaldns.name
+  user = aws_iam_user.externaldns.name
 }
 
 #tfsec:ignore:aws-iam-no-user-attached-policies
 resource "aws_iam_user" "externaldns" {
-  name = "${var.cluster_name}_cluster_dns_user"
-  path = "/externaldns/"
+  name = "externaldns-${var.cluster_name}-cluster"
+  path = "/automation/incluster/"
+}
+
+data "aws_route53_zone" "this" {
+  name = var.dns_managed_zone
 }
 
 #tfsec:ignore:aws-iam-no-policy-wildcards
@@ -25,7 +29,7 @@ resource "aws_iam_user_policy" "externaldns" {
         "route53:ChangeResourceRecordSets"
       ],
       "Resource": [
-        "arn:aws:route53:::hostedzone/Z01771591GBUB3YYNQKTI"
+        "arn:aws:route53:::hostedzone/${data.aws_route53_zone.this.zone_id}"
       ]
     },
     {
