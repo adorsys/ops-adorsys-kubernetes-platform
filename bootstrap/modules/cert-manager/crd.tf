@@ -15,4 +15,8 @@ spec:
        ingress:
          class: nginx
 YAML
+
+  depends_on = [
+    helm_release.cert_manager
+  ]
 }
