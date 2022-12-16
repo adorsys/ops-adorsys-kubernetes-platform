@@ -2,6 +2,11 @@ module "argocd" {
   source = "../bootstrap/modules/argocd"
 
   cluster_name = var.cluster_name
+
+  depends_on = [
+    module.ingress
+  ]
+
 }
 
 module "cert-manager" {
