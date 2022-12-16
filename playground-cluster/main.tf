@@ -21,8 +21,12 @@ module "dex" {
 module "dns" {
   source = "../bootstrap/modules/external-dns"
 
-  cluster_name     = var.cluster_name
+  cluster_name = var.cluster_name
+
   dns_managed_zone = "adorsys.io."
+  dns_domain_filters = [
+    "adorsys.io"
+  ]
 }
 
 module "external-secrets" {

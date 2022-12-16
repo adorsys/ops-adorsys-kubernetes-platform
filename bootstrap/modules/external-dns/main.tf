@@ -5,15 +5,15 @@ resource "helm_release" "external_dns" {
   version    = "1.12.0"
   namespace  = "ops-externaldns"
 
-  atomic           = true
-  cleanup_on_fail  = true
-  lint             = true
-  timeout          = 200
+  atomic          = true
+  cleanup_on_fail = true
+  lint            = true
+  timeout         = 200
 
   values = [
     <<YAML
 domainFilters:
-  - adorsys.io
+  ${yamlencode(var.dns_domain_filters)}
 env:
   - name: AWS_DEFAULT_REGION
     value: eu-central-1
