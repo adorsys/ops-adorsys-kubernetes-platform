@@ -19,78 +19,59 @@ provider "registry.terraform.io/gavinbunney/kubectl" {
 }
 
 provider "registry.terraform.io/hashicorp/aws" {
-  version     = "4.45.0"
-  constraints = "4.45.0"
+  version     = "4.47.0"
+  constraints = "4.47.0"
   hashes = [
-    "h1:/zHxqox3/4xqLyZq71sfwkQMBMorroA/JF5eBgkYjxs=",
-    "h1:2Q1ZOA3hNuS0cJvyl5HcKELREDE9ULMrxFu6TTS6ZFA=",
-    "h1:AKX4R3U+kBpQB5oU08kSrzl5CLsMhbK+BKZVrwYDXZQ=",
-    "h1:EQ5L9Mfn1TLcSvslSYJ3xfrunQPzSi6jXewWqQZ7uRI=",
-    "h1:IKlAzeFeTENTaXij4jVZqOhZ9sJDxcJODV12p2QQ+Rs=",
-    "h1:J/XjRsEJIpxi+mczXQfnH3nvfACv3LRDtrthQJCIibY=",
-    "h1:SldVY6f+D5uiApQNemxU5jsmwsbzuSY14Gcs5axMmIw=",
-    "h1:VKmkAkwT5y56lSDzRMU4U/1TuCOt/W4PrTVEV7QO5xw=",
-    "h1:ZFb6RqY48Fe+18sOC62wiE38XYPaTg98RJZO+EnsvCU=",
-    "h1:aXWTWsY7wOAFvbyS4asC5L6TAnz1OWUj403tQdKTZjo=",
-    "h1:hJ8sqJFjzU/rc5mXEocl1b0wOrbkrsuOvMBP7vPdL8g=",
-    "h1:iNgrQzAnLH2z11JZghsx+mZ2qIMrwOCP1EL290Ehhko=",
-    "h1:jAJjxVeu+cHso5A/4DBVnaoed0sonKirD33Z/4GZB90=",
-    "h1:xwleZVEjEfgCEom/Pfk4kMY0RZllUEAx62NLbXSItFI=",
-    "zh:22da03786f25658a000d1bcc28c780816a97e7e8a1f59fff6eee7d452830e95e",
-    "zh:2543be56eee0491eb0c79ca1c901dcbf71da26625961fe719f088263fef062f4",
-    "zh:31a1da1e3beedfd88c3c152ab505bdcf330427f26b75835885526f7bb75c4857",
-    "zh:4409afe50f225659d5f378fe9303a45052953a1219f7f1acc82b69d07528b7ba",
-    "zh:4dadec3b783f10d2f8eef3dab5e817baae9c932a7967d45fe3d77fcbcbdaa438",
-    "zh:55be80d6e24828dcb0db7a0226fb275415c1c0ad63dd2f33b76f3ac0cd64e6a6",
-    "zh:560bba29efb7dbe0bfcc937369d88817aa31a8d18aa25395b1afe2576cb04495",
-    "zh:6caacc202e83438ff63d5d96733e283f44e349668d96c6b1c5c7df463ebf85cc",
-    "zh:6cabab83a61d5b4ac801c5a5d57556a0e76ec8dc879d28cf777509db5f6a657e",
-    "zh:96c4528bf9c16edb8841b68479ec51c499ed7fa680462fa28caeab3fc168bb43",
-    "zh:9b12af85486a96aedd8d7984b0ff811a4b42e3d88dad1a3fb4c0b580d04fa425",
-    "zh:cdc0b47ff840d708fbf75abfe86d23dc7f1dffdd233a771822a17b5c637f4769",
-    "zh:d9a9583e82776d1ebb6cf6c3d47acc2b302f8778f470ceffe7579dc794eb1feb",
-    "zh:e9367ca9f6f6418a23cdf8d01f29dd0c4f614e78499f52a767a422e4c334b915",
-    "zh:f6d355a2fb3bcebb597f68bbca4fa2aaa364efd29240236c582375e219d77656",
+    "h1:5fBXO6E4TcmbZZLVB7pHvofZiJ++aGplZVbFD1dSVa8=",
+    "h1:BdJV7bQPBSHvy23vKDr0il05BArQUIco/XbJjHjNNsI=",
+    "h1:FFF396spmBnL7UPoTQ8jbAR+2oMc8dQFcZ+KH8UwdeY=",
+    "h1:GrJ/kbnRJ/g1C6j0H4ZlFI6T0Fe+qLrXp60caO+ZHBA=",
+    "h1:J4PCUWoWaJbNP+GadGduWIeERw/AusE5enUJY8kKmNU=",
+    "h1:RW2cho76j8Agmf9x+J7HaKNZGiFqBXrD111VHVWM7Kw=",
+    "h1:UjvbGSSQf3LKrIQ7VkHnRzdAVBcDhpn88fvRv8faWkQ=",
+    "h1:V9wxkqAQVMkjt5cJWH+PmUhVz/R/+tE2OLVLBsjxAmw=",
+    "h1:Xk/k81FU7zNulqpwFMhGolL+qT+O//3IHdWae2RjksI=",
+    "h1:XoRhWSAQ1wtvHqAc1DD5KBCIDkZmny4DauntfQY3kdU=",
+    "h1:aK6YFfbXS9bNa6c1AtmxdOmInSiYrxpWg1NQe0bLoCM=",
+    "h1:khaWvnCzo8YA+za9PZeBgEfQZXO2qCidmeoBkWv9n0Q=",
+    "h1:t68utscK4Ag//q9cxmTeQUdNH5Gt4+8pCN8376lDQqk=",
+    "h1:uhsIme6z+sMxVJsL+BgXHL6e2oZoZr5PShzAx+99wjs=",
   ]
 }
 
 provider "registry.terraform.io/hashicorp/helm" {
-  version     = "2.7.1"
-  constraints = "2.7.1"
+  version     = "2.8.0"
+  constraints = "2.8.0"
   hashes = [
-    "h1:L5qLTfZH7PnZt9+YnS7iYmPBEDQOpEjZiF0v50BRNi8=",
-    "zh:13e2467092deeff01c4cfa2b54ba4510aa7a9b06c58f22c4215b0f4333858364",
-    "zh:4549843db4fdf5d8150e8c0734e67b54b5c3bcfc914e3221e6952f428fb984d2",
-    "zh:55b5f83ed52f93dd00a73c33c948326052efd700350c19e63bb1679b12bfcda6",
-    "zh:749397e41393289eb0ef6efd0a75911d29b8aa7f48e5d6813b4b350dad91acbd",
-    "zh:7a4a2c95b055f6c8e70d1fc7a4cc4fd6e4f04845be36e40d42d31dfc13db37b8",
-    "zh:8143e5b8218857052505c805b570889b862c618ce6cbfbddb98938ff7a5901d3",
-    "zh:856d94b3b34d6204d66c6de4feab4737c74dba037ad64e4c613e8eec61d17f1a",
-    "zh:b9b037f1edda209022df1c7fc906786970524873e27b061f3355cb9bbed2cf08",
-    "zh:c433b27f52a0600490af07f8b217ab0b1048ba347d68e6fe478aba18634e78d9",
-    "zh:da133748368c6e27b433cd7faeb7b800536c8651e7af0415452901dfc7577dbf",
-    "zh:eecc63c2dec8aafa2ffd7426800c3e1a5e31e848be01ea9511ad0184dce15945",
-    "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+    "h1:K9wKInyQdoTt0tEjOYPgYLpSbk9H6mGGJPxs/YkSbkk=",
+    "h1:Qr4Po2H4AqNBIG1pMmddvgZZdcmu4uLu714VoafnzGQ=",
+    "h1:SAwW8iYsXVDhCs8UL5ElzfN6iP3q3tdObPwJiTpCkKI=",
+    "h1:U0w0mUT0SwZCR0poGNSxGaZJKWcOiu4GerpGztYBiMM=",
+    "h1:UQ0zpun2e0EeQLcKpIxl5xUnYiEX+kEhFI1VUNZ5HjQ=",
+    "h1:XMYSrEEPahRBuMXfIXMdoMqMw8FEKtYfNP1JwtGJ1Uo=",
+    "h1:a98mBNghv9odh5PVmgdXapgyYJmO/ncAWkwLWdXLuY4=",
+    "h1:abRryu69lsIGXctqjMVoaKqi74eE12Vzd2FLpds1/PI=",
+    "h1:j/c5LCn/g2qalb4i3DCinrbB1eW8u2AjWEqqm1+Xh74=",
+    "h1:j10Se/GqY1TI7/vYxwDlwlMGCi0DGma0XAWOZcgy7Sk=",
+    "h1:oLRS/GwuhmXIQhhfH//LLyy6LMWuUdUjJIA2Wh4FVmk=",
   ]
 }
 
 provider "registry.terraform.io/hashicorp/kubernetes" {
-  version     = "2.16.0"
-  constraints = "2.16.0"
+  version     = "2.16.1"
+  constraints = "2.16.1"
   hashes = [
-    "h1:a5R1sKA7J5RGTBhFmoH1D4jOzsEg0pi18qTV7EKC/Xo=",
-    "zh:172830e270e49b3d6c975383f6c2f1683524ab667e48a481285d535392f29cf4",
-    "zh:1b2919c66f6bf49a24adb3f0663e198383562829bc1c06c680cf0a2019571d4f",
-    "zh:2c0b1c6032358c11539d1f99ddd803dc37b06127e8d220e9b9a81a233a290a58",
-    "zh:2c6b49d0014a4398e35d05ce2303d10482c91b49320555e2389a8b85f28117ea",
-    "zh:497e76411feb3f79b8eaa3bb29a387c6d89b888f7d9d028142dc5590ff149e45",
-    "zh:771428ba9ed855743fd7e6b7ee7d3d837e401c787da618a8cff5f6e7375a6245",
-    "zh:cb15f6d7eaa6aa385215f6d77dcfd5615e40d170800ce9fbee3d73b5c6ad379f",
-    "zh:e8de8530e27903d4581b4494a267ab84ab3faeaaa598986fea74a99cfa3b37dc",
-    "zh:efd5d1b02d3b68d0b8913372421d292766ba572e54b60b16bc38b439b9865095",
-    "zh:f4568bda22c959dc510f9fb8c1ac141ded7c99df4ba430efcd470b13776ce9cb",
-    "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
-    "zh:fa08fa52d3b4f93d24373a34360855787971532a1f5fe085a4549b04ebf329cc",
+    "h1:6HmWxv4GZnrRpDoEN+K4qfhURA3ie0bNu3p5LE4BhyA=",
+    "h1:NDWCh0gJmT0lTT91ogYwKz2HxiDahr9BcPlLR1ziUso=",
+    "h1:O23HBuu2cPnLfW/lqvMM6eAeVx7eZgjqsK+Nz/FX2Gg=",
+    "h1:PO4Ye/+lu5hCaUEOtwNOldQYoA0dqL1bcBICIpdlcd8=",
+    "h1:Ufm9BrRyP4oLYsAhfKzfQntPt1rrU2NMDGCuqYg+hTY=",
+    "h1:ZLWgKuDD9EUmFC+NqEEkg66Vy383R/R+bn6KovOGM1w=",
+    "h1:i+DwtJK82sIWmTcQA9lL0mlET+14/QpUqv10fU2o3As=",
+    "h1:kO/d+ZMZYM2tNMMFHZqBmVR0MeemoGnI2G2NSN92CrU=",
+    "h1:lO10r6c/Wl8WZItrDabRqCirMVVuLAl9Yr3v2eRSUlc=",
+    "h1:mh9dfh4w8SNDKrNB03Q5PPC6e7+/l6b+mg1+Dqez1FU=",
+    "h1:nU+ZLmKSfqlAiN9A1u0gRlq1ROnv6QRYrXB+VqpCIXY=",
   ]
 }
 
