@@ -1,5 +1,5 @@
 data "aws_secretsmanager_secret" "azure" {
-  arn = "arn:aws:secretsmanager:eu-central-1:571075516563:secret:kaas/staging/dex/azure-adorsys-rAC4yf"
+  name = "kaas/${var.cluster_name}-cluster/dex/azure-ad"
 }
 
 data "aws_secretsmanager_secret_version" "azure" {
@@ -92,11 +92,11 @@ resource "kubernetes_secret" "dex_azure_ad_connector" {
   }
 
   data = {
-    MICROSOFT_CLIENT_ID = jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_ID"]
+    MICROSOFT_CLIENT_ID     = jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_ID"]
     MICROSOFT_CLIENT_SECRET = jsondecode(data.aws_secretsmanager_secret_version.azure.secret_string)["DEX_MICROSOFT_CLIENT_SECRET"]
   }
 
-  type = "Opaque"
+  type       = "Opaque"
   depends_on = [kubernetes_manifest.ns]
 }
 
@@ -116,11 +116,11 @@ resource "kubernetes_secret" "dex_argocd_client" {
   }
 
   data = {
-    client-id = "argo"
+    client-id     = "argo"
     client-secret = random_password.dex_argocd_client.result
   }
 
-  type = "Opaque"
+  type       = "Opaque"
   depends_on = [kubernetes_manifest.ns]
 }
 
@@ -131,15 +131,10 @@ resource "kubernetes_secret" "dex_argocd" {
   }
 
   data = {
-    client-id = "argo"
+    client-id     = "argo"
     client-secret = random_password.dex_argocd_client.result
   }
 
-  type = "Opaque"
+  type       = "Opaque"
   depends_on = [kubernetes_manifest.ns]
 }
-
-
-
-
-

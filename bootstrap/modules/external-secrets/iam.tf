@@ -1,11 +1,13 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_access_key" "externalsecrets" {
-  user    = aws_iam_user.externalsecrets.name
+  user = aws_iam_user.externalsecrets.name
 }
 
 #tfsec:ignore:aws-iam-no-user-attached-policies
 resource "aws_iam_user" "externalsecrets" {
-  name = "${var.cluster_name}_cluster_secrets_user"
-  path = "/externalsecrets/"
+  name = "externalsecrets-${var.cluster_name}-cluster"
+  path = "/automation/incluster/"
 }
 
 #tfsec:ignore:aws-iam-no-policy-wildcards
@@ -28,7 +30,7 @@ resource "aws_iam_role_policy" "externalsecrets" {
         "secretsmanager:ListSecretVersionIds"
       ],
       "Resource": [
-        "arn:aws:secretsmanager:eu-central-1:571075516563:secret:kaas/k8s/shared-secrets/*"
+        "arn:aws:secretsmanager:eu-central-1:${data.aws_caller_identity.current.account_id}:secret:kaas/clusterwide-sharedsecrets/*"
       ]
     }
   ]
@@ -37,7 +39,7 @@ EOF
 }
 
 resource "aws_iam_role" "assume_role" {
-  name = "${var.cluster_name}_cluster_secrets_user"
+  name               = "externalsecrets-${var.cluster_name}-cluster"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -46,7 +48,7 @@ resource "aws_iam_role" "assume_role" {
       "Sid": "Statement1",
       "Effect": "Allow",
       "Principal": {
-          "AWS": "arn:aws:iam::571075516563:user/externalsecrets/${var.cluster_name}_cluster_secrets_user"
+          "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/automation/incluster/externalsecrets-${var.cluster_name}-cluster"
       },
       "Action": "sts:AssumeRole"
     }
