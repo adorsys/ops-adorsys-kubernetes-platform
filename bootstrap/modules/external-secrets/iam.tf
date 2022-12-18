@@ -40,6 +40,7 @@ EOF
 
 resource "aws_iam_role" "assume_role" {
   name               = "externalsecrets-${var.cluster_name}-cluster"
+  path               = "/automation/"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

@@ -1,3 +1,5 @@
+# we don't deploy any PSP which we currently need
+# but the setup is working with our default PSP provisioned by argocd
 resource "helm_release" "external_secrets" {
   chart      = "external-secrets"
   name       = "external-secrets"
@@ -5,10 +7,10 @@ resource "helm_release" "external_secrets" {
   version    = "0.7.0"
   namespace  = "ops-external-secrets"
 
-  atomic           = true
-  cleanup_on_fail  = true
-  lint             = true
-  timeout          = 200
+  atomic          = true
+  cleanup_on_fail = true
+  lint            = true
+  timeout         = 200
 
   values = [
     <<YAML

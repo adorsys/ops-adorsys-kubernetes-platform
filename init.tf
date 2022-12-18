@@ -108,6 +108,37 @@ resource "aws_iam_user_policy" "route53" {
 JSON
 }
 
+resource "aws_iam_user_policy" "iam_role" {
+  name = "iam_cluster_role"
+  user = aws_iam_user.ops_github_kaas.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = <<JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1667481895059",
+            "Action": [
+                "iam:CreateRole",
+                "iam:TagRole",
+                "iam:GetRole",
+                "iam:ListRolePolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListInstanceProfilesForRole",
+                "iam:DeleteRole",
+                "iam:PutRolePolicy",
+                "iam:GetRolePolicy",
+                "iam:DeleteRolePolicy"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/automation/*"
+        }
+    ]
+}
+JSON
+}
 
 resource "aws_iam_access_key" "github" {
   user = aws_iam_user.ops_github_kaas.name

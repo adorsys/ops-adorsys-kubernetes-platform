@@ -2,7 +2,7 @@
 
 This repository bootstraps all adorsys-k8s cluster provisioned by kubermatic.
 
-If you, as an adorsys developer need help, [consult our wiki](https://github.com/adorsys/ops-k8s-bootstrap/wiki).
+If you - as an adorsys developer - need help [consult our wiki](https://github.com/adorsys/ops-k8s-bootstrap/wiki).
 
 ## Available Tools
 The following tools are available for the clusters
