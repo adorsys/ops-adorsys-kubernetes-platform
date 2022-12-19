@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "cluster_secret_store" {
-  yaml_body = <<YAML
+  yaml_body  = <<YAML
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
@@ -25,7 +25,7 @@ YAML
 }
 
 resource "kubectl_manifest" "external_cluster_secret" {
-  yaml_body = <<YAML
+  yaml_body  = <<YAML
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterExternalSecret
 metadata:
@@ -35,7 +35,7 @@ spec:
   namespaceSelector:
     matchLabels:
       git-engine: gitlab
-  refreshTime: "15m"
+  refreshTime: "1m"
   externalSecretSpec:
     secretStoreRef:
       name: aws-ssm
@@ -55,7 +55,7 @@ spec:
     data:
     - secretKey: dockerconfig
       remoteRef:
-        key: kaas/k8s/shared-secrets/gitlab-image-pull-secret
+        key: kaas/clusterwide-sharedsecrets/gitlab-image-pull-secret
 YAML
   depends_on = [helm_release.external_secrets]
 }
