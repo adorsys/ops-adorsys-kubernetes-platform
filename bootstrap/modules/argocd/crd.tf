@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "app_project" {
-  yaml_body  = <<YAML
+  yaml_body = <<YAML
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -16,7 +16,11 @@ spec:
     - namespace: 'ops-argocd'
       server: https://kubernetes.default.svc
 YAML
-  depends_on = [kubernetes_manifest.ns]
+
+  depends_on = [
+    helm_release.argocd
+  ]
+
 }
 
 resource "kubectl_manifest" "app_of_apps" {
