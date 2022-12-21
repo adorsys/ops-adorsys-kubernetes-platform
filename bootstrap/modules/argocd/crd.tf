@@ -35,6 +35,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
+      allowEmpty: true
   project: app-of-apps
   source:
     kustomize: {}
@@ -63,6 +64,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
+      allowEmpty: true
   project: app-of-apps
   source:
     kustomize: {}
