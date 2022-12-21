@@ -13,7 +13,7 @@ resource "helm_release" "external_dns" {
   values = [
     <<YAML
 domainFilters:
-  ${yamlencode(var.dns_domain_filters)}
+  ${indent(2, yamlencode(var.dns_managed_zones))}
 env:
   - name: AWS_DEFAULT_REGION
     value: eu-central-1

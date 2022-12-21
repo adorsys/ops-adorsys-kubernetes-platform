@@ -28,9 +28,14 @@ module "dns" {
 
   cluster_name = var.cluster_name
 
-  dns_managed_zone = "adorsys.io."
-  dns_domain_filters = [
-    "adorsys.io"
+  dns_managed_zones = [
+    "tribe.adorsys.io",
+    "playground.adorsys.io"
+  ]
+
+  depends_on = [
+    aws_route53_zone.tribe,
+    aws_route53_zone.playground
   ]
 }
 

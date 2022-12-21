@@ -98,7 +98,13 @@ resource "aws_iam_user_policy" "route53" {
             "Action": [
                 "route53:GetHostedZone",
                 "route53:ListHostedZones",
-                "route53:ListTagsForResource"
+                "route53:ListTagsForResource",
+                "route53:CreateHostedZone",
+                "route53:GetChange",
+                "route53:DeleteHostedZone",
+                "route53:ChangeTagsForResource",
+                "route53:ChangeResourceRecordSets",
+                "route53:ListResourceRecordSets"
             ],
             "Effect": "Allow",
             "Resource": "*"

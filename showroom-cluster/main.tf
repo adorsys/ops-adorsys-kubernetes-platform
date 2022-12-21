@@ -28,8 +28,7 @@ module "dns" {
 
   cluster_name = var.cluster_name
 
-  dns_managed_zone = "adorsys.io."
-  dns_domain_filters = [
+  dns_managed_zones = [
     "adorsys.io"
   ]
 }

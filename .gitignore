@@ -1,5 +1,6 @@
 *.kubeconfig
 *.kubermatic
+/.terraform.lock.hcl
 
 # Local .terraform directories
 **/.terraform/*

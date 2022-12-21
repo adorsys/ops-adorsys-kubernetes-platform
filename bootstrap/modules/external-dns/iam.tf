@@ -9,13 +9,16 @@ resource "aws_iam_user" "externaldns" {
 }
 
 data "aws_route53_zone" "this" {
-  name = var.dns_managed_zone
+  for_each = toset(var.dns_managed_zones)
+  name     = each.key
 }
 
 #tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_user_policy" "externaldns" {
-  name = "${var.cluster_name}_cluster_dns_policy"
+  name = "${var.cluster_name}_cluster_dns_policy_${each.key}"
   user = aws_iam_user.externaldns.name
+
+  for_each = toset(var.dns_managed_zones)
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -29,7 +32,7 @@ resource "aws_iam_user_policy" "externaldns" {
         "route53:ChangeResourceRecordSets"
       ],
       "Resource": [
-        "arn:aws:route53:::hostedzone/${data.aws_route53_zone.this.zone_id}"
+        "arn:aws:route53:::hostedzone/${data.aws_route53_zone.this[each.key].zone_id}"
       ]
     },
     {
