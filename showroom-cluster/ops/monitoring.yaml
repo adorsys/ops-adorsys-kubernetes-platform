@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blackbox-exporter
+  namespace: ops-argocd
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: ops-monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+  source:
+    chart: prometheus-blackbox-exporter
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 7.1.3
+    helm:
+      releaseName: blackbox-exporter
+      values: |
+        service:
+          annotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: /metrics
+            prometheus.io/port: "9115"
+        config:
+          modules:
+            http_probe:
+              prober: http
+              timeout: 5s
+              http:
+                valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+                valid_status_codes: [200, 401]
+                follow_redirects: true
+                preferred_ip_protocol: "ip4"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prometheus-scraping-blackbox
+  namespace: mla-system
+data:
+  blackbox.yaml: |
+    - job_name: 'blackbox'
+      metrics_path: /probe
+      params:
+        module: [http_probe]
+      static_configs:
+        - targets:
+          - tream.tribe.adorsys.io
+      relabel_configs:
+        - source_labels: [__address__]
+          target_label: __param_target
+        - source_labels: [__param_target]
+          target_label: domainendpoint
+        - target_label: __address__
+          replacement: blackbox-exporter-prometheus-blackbox-exporter.ops-monitoring.svc:9115
+---

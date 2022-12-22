@@ -13,7 +13,7 @@ spec:
   sourceRepos:
     - 'git@github.com:adorsys/ops-k8s-bootstrap.git'
   destinations:
-    - namespace: 'ops-argocd'
+    - namespace: '*'
       server: https://kubernetes.default.svc
 YAML
 
@@ -73,7 +73,6 @@ spec:
     path: "${var.cluster_name}-cluster/ops"
   destination:
     server: https://kubernetes.default.svc
-    namespace: ops-argocd
 YAML
 
   depends_on = [
