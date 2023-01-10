@@ -8,49 +8,27 @@
 [📖 Documentation][docs]
 </div>
 
-# :cloud: Kubernetes as an adorsys Service
+# :cloud: akp - adorsys kubernetes platform
 
-This repository bootstraps all adorsys-k8s cluster provisioned by kubermatic.
+This repository bootstraps all adorsys-k8s cluster, provisioned by kubermatic.
 
-If you - as an adorsys developer - need help [consult our wiki](https://github.com/adorsys/ops-k8s-bootstrap/wiki).
+If you - as an adorsys developer - need help [consult our wiki](https://github.com/adorsys/ops-adorsys-kubernetes-platform/wiki).
 
-## Available Tools
-The following tools are available for the clusters
+## :wrench: Available Tools
+The following tools are available
 
-* external-dns
-* nginx ingress
-* certmanager with letsencrypt
-* argocd with gitlab & github access
-* dex with azure as idp
-* external-secrets for accessing the aws-secretstore
-
-## OPS Docu
-This section is only relevant for the ops ppl.
-
-### Initial Setup
-> **Note**
->
-> This is done once(!) and here for documentation purpose only. If we switch
-> aws accounts or basic infrastructure, some tasks might be neccessary again.
-
-Terraform should run with YOUR IAM profile configured:
-```bash
-# in the root folder of this repo
-export AWS_PROFILE=new-profile
-terraform init
-terraform apply
-```
-Further information is available in #56.
-
-### :grey_question: Add new cluster
-After the initial creation of the kubermatic cluster the following steps should
-be necessary to bootstrap:
-
-1. Create a new branch
-2. Create a new `*-cluster` folder and copy/adjust most of the  `*.tf` from
-an existing cluster
-3. Review the PR and merge on `main`
-
+* [external-dns](https://github.com/kubernetes-sigs/external-dns)  
+  Managing all dns tasks for `adorsys.io`
+* [nginx ingress](https://github.com/kubernetes/ingress-nginx)  
+  Allowing public traffic inside the cluster
+* [certmanager with lets-encrypt](https://github.com/cert-manager/cert-manager)  
+  Providing x509 certs for secure access
+* [argocd with gitlab & github access](https://github.com/argoproj/argo-cd)  
+  Deploying the applications with GitOps
+* [dex with azure as idp](https://github.com/dexidp/dex)  
+  Access/Identity Management for loginrelated apps
+* [external-secrets in aws-ssm](https://github.com/external-secrets/external-secrets)  
+  Accessing sensitive Information inside the cluster
 
 [docs]: https://github.com/adorsys/ops-kubernetes-as-an-adorsys-service/wiki
 [page]: https://adorsys.com/en/services/devops-services/
