@@ -55,6 +55,7 @@ data:
       static_configs:
         - targets:
           - tream.tribe.adorsys.io
+          - encode.tribe.adorsys.io
       relabel_configs:
         - source_labels: [__address__]
           target_label: __param_target
