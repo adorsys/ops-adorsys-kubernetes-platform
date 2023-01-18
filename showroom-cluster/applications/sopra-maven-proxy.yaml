@@ -20,8 +20,6 @@ spec:
     repoURL: https://git.adorsys.de/sdv/sdv-connector.git
     targetRevision: mvnproxy_migration_to_akp
     path: infra/mavenProxy/kubernetes
-    helm:
-      releaseName: mavenproxy
   destination:
     server: https://kubernetes.default.svc
     namespace: sopra-maven-proxy
