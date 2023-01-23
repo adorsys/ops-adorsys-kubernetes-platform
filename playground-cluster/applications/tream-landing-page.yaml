@@ -18,7 +18,7 @@ spec:
   project: default
   source:
     repoURL: https://git.adorsys.de/mobile-quest/landing-page.git
-    targetRevision: kaaas-migration
+    targetRevision: master
     path: kubernetes
   destination:
     server: https://kubernetes.default.svc
