@@ -27,7 +27,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-      - uses: aquasecurity/tfsec-action@v1.0.2
+      - uses: aquasecurity/tfsec-action@v1.0.3
         id: tfsec
         with:
           additional_args: "--out tfsec.xml"
