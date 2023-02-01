@@ -18,7 +18,7 @@ spec:
   project: default
   source:
     repoURL: https://git.adorsys.de/sdv/sdv-connector.git
-    targetRevision: mvnproxy_migration_to_akp
+    targetRevision: master
     path: infra/mavenProxy/kubernetes
   destination:
     server: https://kubernetes.default.svc
