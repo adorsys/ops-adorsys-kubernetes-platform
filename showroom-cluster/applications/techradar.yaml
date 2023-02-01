@@ -18,7 +18,7 @@ spec:
   project: default
   source:
     repoURL: https://git.adorsys.de/technology-world/adorsys-tech-radar.git
-    targetRevision: migrate2kaaas
+    targetRevision: main
     path: adorsys-tech-radar
     helm:
       releaseName: showroom
