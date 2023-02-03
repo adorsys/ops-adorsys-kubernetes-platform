@@ -17,9 +17,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://git.adorsys.de/bankverlagibanbic/bv-builds
+    repoURL: https://git.adorsys.de/bankverlagibanbic/bv-builds.git
     targetRevision: main
-    path: infra/mavenProxy/kubernetes
+    path: kubernetes
   destination:
     server: https://kubernetes.default.svc
     namespace: bv-builds
