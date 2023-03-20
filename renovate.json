@@ -8,6 +8,7 @@
   "docker": {
     "enabled": false
   },
+  "reviewers": ["team:devops"],
   "terraform": {
     "depTypes": ["helm_release"]
   },
