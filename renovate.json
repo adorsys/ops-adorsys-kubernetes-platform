@@ -16,7 +16,8 @@
   "schedule": [
     "before 3am on Monday"
   ],
-  "platformAutomerge": true
+  "labels": ["dependency"],
+  "platformAutomerge": true,
   "packageRules": [
     {
       "matchUpdateTypes": ["patch", "pin", "digest", "devDependencies"],
