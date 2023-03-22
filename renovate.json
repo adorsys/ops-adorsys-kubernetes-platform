@@ -15,5 +15,21 @@
   "timezone": "Europe/Berlin",
   "schedule": [
     "before 3am on Monday"
+  ],
+  "platformAutomerge": true
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "pin", "digest", "devDependencies"],
+      "automerge": true,
+      "automergeType": "branch",
+      "automergeSchedule": [
+        "after 1am",
+        "before 4am"
+      ]
+    },
+    {
+      "matchUpdateTypes": ["major", "minor"],
+      "reviewers": ["devops"]
+    }
   ]
 }
