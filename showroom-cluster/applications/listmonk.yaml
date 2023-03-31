@@ -17,7 +17,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://https://git.adorsys.de/adorsys/listmonk.git
+    repoURL: https://git.adorsys.de/adorsys/listmonk.git
     targetRevision: main
     path: kubernetes
   destination:
