@@ -14,7 +14,7 @@ resource "helm_release" "postgres-operator" {
     <<YAML
 configGeneral:
   min_instances: 1
-  max_instances: 2
+  max_instances: 3
   workers: 4
 
 configKubernetes:
