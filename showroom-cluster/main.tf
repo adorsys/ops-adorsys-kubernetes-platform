@@ -47,3 +47,14 @@ module "external-secrets" {
 module "ingress" {
   source = "../bootstrap/modules/ingress-nginx"
 }
+
+module "postgres-operator" {
+  source = "../bootstrap/modules/postgres-operator"
+
+  cluster_name = var.cluster_name
+
+  depends_on = [
+    module.argocd
+  ]
+
+}
