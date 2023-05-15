@@ -20,17 +20,21 @@
   "platformAutomerge": true,
   "packageRules": [
     {
-      "matchUpdateTypes": ["patch", "pin", "digest", "devDependencies"],
+      "matchUpdateTypes": ["patch", "pin", "digest"],
       "automerge": true,
       "automergeType": "branch",
       "automergeSchedule": [
         "after 1am",
         "before 4am"
-      ]
+      ],
+      "additionalBranchPrefix": "{{parentDir}}-",
+      "packagePatterns": [".*"]
     },
     {
       "matchUpdateTypes": ["major", "minor"],
-      "reviewers": ["team:devops"]
+      "reviewers": ["team:devops"],
+      "additionalBranchPrefix": "{{parentDir}}-",
+      "packagePatterns": [".*"]
     }
   ]
 }
