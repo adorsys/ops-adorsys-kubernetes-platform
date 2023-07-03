@@ -27,14 +27,12 @@
         "after 1am",
         "before 4am"
       ],
-      "additionalBranchPrefix": "{{parentDir}}-",
-      "packagePatterns": [".*"]
+      "additionalBranchPrefix": "{{parentDir}}-"
     },
     {
       "matchUpdateTypes": ["major", "minor"],
       "reviewers": ["team:devops"],
-      "additionalBranchPrefix": "{{parentDir}}-",
-      "packagePatterns": [".*"]
+      "additionalBranchPrefix": "{{parentDir}}-"
     }
   ]
 }
