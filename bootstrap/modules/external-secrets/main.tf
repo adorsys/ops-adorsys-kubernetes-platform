@@ -4,7 +4,7 @@ resource "helm_release" "external_secrets" {
   chart      = "external-secrets"
   name       = "external-secrets"
   repository = "https://charts.external-secrets.io"
-  version    = "0.9.2"
+  version    = "0.9.4"
   namespace  = "ops-external-secrets"
 
   atomic          = true
