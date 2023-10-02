@@ -9,7 +9,7 @@ jobs:
     outputs:
       dir: ${{ steps.set-dirs.outputs.dir }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - id: set-dirs
         run: echo "dir=$(ls -d *-cluster/ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
@@ -23,7 +23,7 @@ jobs:
       run:
         working-directory: ${{ matrix.cluster }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: hashicorp/setup-terraform@v2
       with:
         terraform_wrapper: false
