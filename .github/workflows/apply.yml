@@ -24,7 +24,7 @@ jobs:
         working-directory: ${{ matrix.cluster }}
     steps:
     - uses: actions/checkout@v4
-    - uses: hashicorp/setup-terraform@v2
+    - uses: hashicorp/setup-terraform@v3
       with:
         terraform_wrapper: false
     - name: Terraform Init
