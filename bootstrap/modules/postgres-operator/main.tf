@@ -2,7 +2,7 @@ resource "helm_release" "postgres-operator" {
   chart = "postgres-operator"
   name  = "postgres-operator"
   repository = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
-  version = "1.9.0"
+  version = "1.13.0"
   namespace = var.namespace
 
   atomic = true
